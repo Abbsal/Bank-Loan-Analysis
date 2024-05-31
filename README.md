@@ -1,14 +1,18 @@
 # Bank Loan Data Analysis Dashboard
 
-Overview
+Overview: 
+
 This project demonstrates the creation of a Power BI dashboard for analyzing bank loan data. The dashboard tracks various KPIs essential for understanding the bank's lending portfolio, including loan applications, funded amounts, amounts received, interest rates, and debt-to-income ratios.
 
 # Tech Stack used: 
 Data Source: MySQL Server
+
 ETL Tools: SQL for data extraction and transformation
+
 Visualization: Power BI
 
 # Key Performance Indicators (KPIs)
+
 Total Loan Applications
 
 Calculates the total number of loan applications received during a specified period.
