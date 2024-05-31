@@ -1,0 +1,41 @@
+-- Creating Database
+CREATE DATABASE bank_loan_data;
+
+-- Creating Table
+CREATE TABLE loan_applications (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    application_date DATE,
+    funded_amount DECIMAL(10, 2),
+    amount_received DECIMAL(10, 2),
+    interest_rate DECIMAL(5, 2),
+    debt_to_income_ratio DECIMAL(5, 2)
+);
+
+-- Selecting Data
+SELECT * FROM loan_applications;
+
+-- Date Functions
+SELECT 
+    DATEPART(year, application_date) AS year,
+    DATEPART(month, application_date) AS month,
+    DATEPART(day, application_date) AS day
+FROM loan_applications;
+
+-- Aggregations and Group By
+SELECT 
+    COUNT(*) AS total_applications,
+    SUM(funded_amount) AS total_funded,
+    SUM(amount_received) AS total_received,
+    AVG(interest_rate) AS avg_interest_rate,
+    AVG(debt_to_income_ratio) AS avg_dti
+FROM loan_applications
+GROUP BY DATEPART(year, application_date), DATEPART(month, application_date);
+
+-- Using CTE and Partitions
+WITH LoanData AS (
+    SELECT 
+        *,
+        ROW_NUMBER() OVER (PARTITION BY DATEPART(year, application_date) ORDER BY application_date) AS row_num
+    FROM loan_applications
+)
+SELECT * FROM LoanData WHERE row_num = 1;
